@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  AWS_REGION: us-east-1  # update if you are in a different region
+  AWS_REGION: us-east-2  # update if you are in a different region
   AWS_LAMBDA_ROLE_ARN: arn:aws:iam::848487018645:role/image-validator-role-ie4pwxjr # replace with your ARN
 
 jobs:
