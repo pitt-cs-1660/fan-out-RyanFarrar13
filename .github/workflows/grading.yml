@@ -21,6 +21,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: DEBUG AWS   # <-- YOUR STEP HERE
+        run: |
+          echo "=== IDENTITY ==="
+          aws sts get-caller-identity
+
+          echo "=== REGION ==="
+          echo $AWS_REGION
+
+          echo "=== SQS QUEUES ==="
+          aws sqs list-queues --region us-east-2
+
+          echo "=== TRY DIRECT GET ==="
+          aws sqs get-queue-url \
+            --queue-name image-processing-dlq \
+            --region us-east-2
+      
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -51,21 +67,7 @@ jobs:
             exit 1
           fi
 
-    - name: DEBUG AWS
-  run: |
-    echo "=== IDENTITY ==="
-    aws sts get-caller-identity
-
-    echo "=== REGION ==="
-    echo $AWS_REGION
-
-    echo "=== SQS QUEUES ==="
-    aws sqs list-queues --region us-east-2
-
-    echo "=== TRY DIRECT GET ==="
-    aws sqs get-queue-url \
-      --queue-name image-processing-dlq \
-      --region us-east-2
+   
 
 
 
