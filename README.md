@@ -4,7 +4,7 @@
 # ![Pitt Panthers](https://upload.wikimedia.org/wikipedia/commons/4/44/Pitt_Panthers_wordmark.svg)
 ## Introduction to Cloud Computing - University of Pittsburgh
 
-## Project Overview a
+## Project Overview 
 
 This project demonstrates event-driven architecture using AWS services. You will build a serverless pipeline that automatically processes images uploaded to S3 using two Lambda functions triggered via an SNS topic in a fan-out pattern.
 
