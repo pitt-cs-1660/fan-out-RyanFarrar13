@@ -51,6 +51,24 @@ jobs:
             exit 1
           fi
 
+    - name: DEBUG AWS
+  run: |
+    echo "=== IDENTITY ==="
+    aws sts get-caller-identity
+
+    echo "=== REGION ==="
+    echo $AWS_REGION
+
+    echo "=== SQS QUEUES ==="
+    aws sqs list-queues --region us-east-2
+
+    echo "=== TRY DIRECT GET ==="
+    aws sqs get-queue-url \
+      --queue-name image-processing-dlq \
+      --region us-east-2
+
+
+
   check-lambda-functions:
     name: Check Lambda Functions
     runs-on: ubuntu-latest
