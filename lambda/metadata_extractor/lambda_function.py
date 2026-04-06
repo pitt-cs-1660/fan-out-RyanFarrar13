@@ -27,7 +27,9 @@ def lambda_handler(event, context):
         "upload_time": upload_time
     }
     
-    output_key = key.replace("uploads/", "processed/metadata/") + ".json"
+    # ✅ FIXED filename (THIS was your bug)
+    filename = key.split('/')[-1].split('.')[0]
+    output_key = f"processed/metadata/{filename}.json"
     
     s3.put_object(
         Bucket=bucket,
@@ -35,6 +37,8 @@ def lambda_handler(event, context):
         Body=json.dumps(metadata),
         ContentType='application/json'
     )
+    
+    print(f"[METADATA] Uploaded to: {output_key}")
     
     return {
         'statusCode': 200,
